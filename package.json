@@ -23,6 +23,9 @@
     "mongoose": "^4.6.4"
   },
   "devDependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "mongoose": "^4.6.4",
     "nodemon": "^1.11.0"
   }
 }
