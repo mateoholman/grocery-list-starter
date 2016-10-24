@@ -43,7 +43,8 @@ app.get('/', (req, res, next) => {
 /* POST Create a grocery list item */
 app.post('/', (req, res, next) => {
   var groceryItem = new GroceryListModel({
-        item : req.body.item
+        item : req.body.item,
+        quantity: req.body.quantity
   });
 
   groceryItem.save((err, item) => {

@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 
 // define our Schema
 const groceryListSchema = new Schema ({
-  'item' : String
+  'item' : String,
+  'quantity' : Number
 });
 
 // export our model

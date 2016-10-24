@@ -34,22 +34,27 @@
     <div class="row">
       <form class="col s12" action="/" method="post">
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s4">
             <input type="text" name="item" class="validate" id="item">
             <label for="item">Item</label>
           </div>
+          <div class="input-field col s2">
+            <input type="number" name="quantity" class="validate" id="quantity">
+            <label for="quantity">Quantity</label>
+          </div>
+
           <button class="btn-floating waves-effect waves-light" type="submit" name="action">
           <i class="material-icons">add</i>
           </button>
         </div>
       </form>
     </div>
-   
+
 
     <!-- Grocery List -->
     <ul>
       <% groceries.forEach(function(groceryItem) { %>
-            <li><%= groceryItem.item %></li>
+            <li><%= groceryItem.item %> - <%= groceryItem.quantity %></li>
         <% }) %>
     </ul>
   </div>
