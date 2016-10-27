@@ -5,28 +5,42 @@ const path = require('path');
 
 // dependencies from npm
 const express = require('express');
+const app = express();                      //Initialize our app
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const GroceryListModel = require('./assets/models/GroceryListModel.js');
 
-// Initialize our app
-const app = express();
+// Use native promises
+mongoose.Promise = global.Promise;
 
-// establish connection to the database
-mongoose.connect('mongodb://localhost/grocery-list');
+// Configure our app to use bodyParser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/assets'));
 
 // Set our views directory
 app.set('views', path.join(__dirname, '/assets/views'));
 app.set('view engine', 'ejs');
 
-// Add middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+// Set our routes
+const groceries = require('./assets/routes/groceries');
+app.use('/groceries', groceries);
+app.use('/*', function (req, res, next) {
+  res.redirect('/groceries');
+});
 
-// Set our static directory
-app.use(express.static(__dirname + '/assets'));
 
-/* GET home page. */
+
+// establish connection to the database
+mongoose.connect('mongodb://localhost/grocery-list');
+
+
+app.use(function (err, req, res, next) {
+  res.json(err);
+});
+
+/* GET home page *
 app.get('/', (req, res, next) => {
     // Here we are asking mongoose to find GroceryListModels,
     // we are not passing any specifice attributes, such
@@ -39,8 +53,9 @@ app.get('/', (req, res, next) => {
     });
   });
 });
+*/
 
-/* POST Create a grocery list item */
+/* POST Create a grocery list item
 app.post('/', (req, res, next) => {
   var groceryItem = new GroceryListModel({
         item : req.body.item,
@@ -50,10 +65,10 @@ app.post('/', (req, res, next) => {
   groceryItem.save((err, item) => {
         // Inserts are run asynchronously.
         // So we have to pass in a callback to be ran when the insert is finished
-    console.log(item);
     res.redirect('/');
   });
 });
+*/
 
 // Set up our server
 const port = 3000;

@@ -14,31 +14,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Custom CSS -->
-
+  <link rel="stylesheet" href="./css/custom.css" type="text/css">
   <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 
 </head>
 
 <body class="teal lighten-4">
   <div class="container">
-    <h1>Grocery List</h1>
-
-    <!-- Form to add new grocery item -->
-
-    <!-- <form action="/" method="post">
-        <input type="text" name="item">
-        <input type="submit" value="+ Add Item">
-    </form> -->
-
 
     <div class="row">
-      <form class="col s12" action="/" method="post">
+      <form class="col s12" action="/groceries" method="post">
         <div class="row">
-          <div class="input-field col s4">
+          <div class="input-field col s4 offset-s3">
             <input type="text" name="item" class="validate" id="item">
             <label for="item">Item</label>
           </div>
-          <div class="input-field col s2">
+          <div class="input-field col s1">
             <input type="number" name="quantity" class="validate" id="quantity">
             <label for="quantity">Quantity</label>
           </div>
@@ -50,13 +42,34 @@
       </form>
     </div>
 
-
+    <h1>Grocery List</h1>
     <!-- Grocery List -->
-    <ul>
-      <% groceries.forEach(function(groceryItem) { %>
-            <li><%= groceryItem.item %> - <%= groceryItem.quantity %></li>
-        <% }) %>
-    </ul>
+    <div class="row" id="groceryList">
+      <table class="highlight col s6 offset-s3">
+        <thead>
+          <th class="col s6" data-field="item">Item</th>
+          <th class="col s2" data-field="quantity">#</th>
+          <th class="col s1" data-field="edit"></th>
+          <th class="col s1" data-field="delete"></th>
+        </thead>
+
+        <tbody>
+          <% groceries.forEach(function(groceryItem) { %>
+          <tr>
+            <td class="col s6"><%= groceryItem.item %></td>
+            <td class="col s2"><%= groceryItem.quantity %></td>
+            <td class="col s1">
+              <i class="tiny material-icons">mode_edit</i>
+            </td>
+            <td class="col s1">
+              <i class="tiny material-icons">delete</i>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
   </div>
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
